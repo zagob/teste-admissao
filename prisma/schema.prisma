@@ -9,3 +9,43 @@ datasource db {
   provider = "sqlite"
   url      = "file:sqlite/dev.db"
 }
+
+model Clients {
+  id         String   @id @default(uuid())
+  login      String   @unique
+  password   String
+  name       String
+  address    String
+  birth_date DateTime
+  cpf        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  operations Operations[]
+  @@map("clients")
+}
+
+model Operations {
+  id              String     @id @default(uuid())
+  id_client       String
+  client          Clients    @relation(fields: [id_client], references: [id])
+  value           Int
+  status          String     @default("open")
+  note_preference Int
+  created_at      DateTime   @default(now())
+  closed_at       DateTime?
+
+  packages        Packages[]
+  @@map("operations")
+}
+
+model Packages {
+  id           String     @id @default(uuid())
+  id_operation String
+  operation    Operations @relation(fields: [id_operation], references: [id])
+  created_at   DateTime   @default(now())
+  closed_at    DateTime?
+  type_note    Int
+
+  @@map("packages")
+}
