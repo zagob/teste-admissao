@@ -23,13 +23,13 @@ export class AuthenticateClientUseCase {
     const client = await this.clientsRepository.findByLogin(login);
 
     if (!client) {
-      throw new AppError("Login or password inválid!");
+      throw new AppError("Login or password inválid!", 401);
     }
 
     const passwordMatch = await compare(password, client?.password);
 
     if (!passwordMatch) {
-      throw new AppError("Login or password inválid!");
+      throw new AppError("Login or password inválid!", 401);
     }
 
     const token = sign({ login }, "secret", {
