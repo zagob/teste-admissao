@@ -37,6 +37,16 @@ class ClientsRepository implements IClientsRepository {
     return existClient;
   }
 
+  async findByManyLogin(login: string): Promise<ICreateClientDTO[] | null> {
+    const client = await prisma.clients.findMany({
+      where: {
+        login,
+      },
+    });
+
+    return client;
+  }
+
   async findById(id: string): Promise<Object | null> {
     const client = await prisma.clients.findFirst({
       where: {

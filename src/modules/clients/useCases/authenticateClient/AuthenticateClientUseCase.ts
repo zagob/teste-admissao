@@ -8,6 +8,14 @@ import { IClientsRepository } from "../../repositories/IClientsRepository";
 
 interface IResponse {
   token: string;
+  client: {
+    id?: string;
+    login: string;
+    name: string;
+    address: string;
+    birth_date: Date;
+    cpf: string;
+  };
 }
 
 @injectable()
@@ -37,6 +45,16 @@ export class AuthenticateClientUseCase {
       expiresIn: "1d",
     });
 
-    return { token };
+    return {
+      token,
+      client: {
+        login: client.login,
+        name: client.name,
+        address: client.address,
+        birth_date: client.birth_date,
+        cpf: client.cpf,
+        id: client.id,
+      },
+    };
   }
 }

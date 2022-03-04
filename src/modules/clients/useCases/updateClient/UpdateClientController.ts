@@ -9,7 +9,7 @@ export class UpdateClientController {
 
     const updateClientUseCase = container.resolve(UpdateClientUseCase);
 
-    const result = await updateClientUseCase.execute({
+    const result = await updateClientUseCase.execute(response, {
       id,
       address,
       birth_date,

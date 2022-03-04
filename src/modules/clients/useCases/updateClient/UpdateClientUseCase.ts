@@ -1,3 +1,4 @@
+import { Response } from "express";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
 import { IUpdateClientDTO } from "../../dtos/IUpdateClientDTO";
@@ -10,7 +11,10 @@ export class UpdateClientUseCase {
     private clientsRepository: IClientsRepository
   ) {}
 
-  async execute({ id, address, birth_date, login, name }: IUpdateClientDTO) {
+  async execute(
+    response: Response,
+    { id, address, birth_date, login, name }: IUpdateClientDTO
+  ) {
     const findClient = await this.clientsRepository.findById(id);
 
     if (!findClient) {
