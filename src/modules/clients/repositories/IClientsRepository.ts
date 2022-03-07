@@ -8,6 +8,7 @@ interface IClientsRepository {
   findById(id: string): Promise<Object | null>;
   findMany(): Promise<Object[]>;
   update(data: IUpdateClientDTO): Promise<Object>;
+  deleteClient(id_client: string): Promise<Object>;
 }
 
 export { IClientsRepository };

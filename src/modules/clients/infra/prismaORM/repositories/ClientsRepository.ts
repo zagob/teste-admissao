@@ -84,6 +84,16 @@ class ClientsRepository implements IClientsRepository {
 
     return updateClient;
   }
+
+  async deleteClient(id_client: string): Promise<Object> {
+    const client = await prisma.clients.delete({
+      where: {
+        id: id_client
+      }
+    })
+    
+    return client
+  }
 }
 
 export { ClientsRepository };

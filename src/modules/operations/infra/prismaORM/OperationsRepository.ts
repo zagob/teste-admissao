@@ -37,4 +37,14 @@ export class OperationsRepository implements IOperationsRepository {
 
     return listOperationId;
   }
+
+  async findByIdClient(id: string): Promise<Operations[] | null> {
+    const listOperations = await prisma.operations.findMany({
+      where: {
+        id_client: id,
+      },
+    });
+
+    return listOperations;
+  }
 }

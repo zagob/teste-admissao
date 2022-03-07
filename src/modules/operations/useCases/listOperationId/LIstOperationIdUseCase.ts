@@ -8,8 +8,8 @@ export class ListOperationIdUseCase {
     private operationRepository: IOperationsRepository
   ) {}
 
-  async execute(id_operation: string) {
-    const findOperation = await this.operationRepository.findById(id_operation);
+  async execute(id: string) {
+    const findOperation = await this.operationRepository.findByIdClient(id);
 
     return findOperation;
   }

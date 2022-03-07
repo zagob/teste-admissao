@@ -23,7 +23,7 @@ operationsRouter.get(
 );
 
 operationsRouter.get(
-  "/list/:id_operation",
+  "/list/:id",
   ensureAuthenticateClient,
   listOperationIdController.handle
 );
